@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+            <nav>
+                <img src="images/tit2.png" class="logo">
+                <ul id="sidemenu">
+                    <li><a href="#header">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <i class="fa-solid fa-circle-xmark" onclick="closemenu()"></i>
+                </ul>
+                <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+
+            </nav>
+            <div class="header-text">
+                <p>Front-End Developer</p>
+                <h1>Hi, I'm <span>Balamurugan</span><br>From Chennai</h1>
+            </div>
+        </div>
+    </div>
+
+    <!--------about--------->
+
+
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="about-col-1">
+                    <img src="images/abt.png">
+                </div>
+                <div class="about-col-2">
+                    <h1 class="sub-tit">About Me</h1>
+                    <p>
+                        I am an Engineering Graduate passed out in the year 2022.
+                        I'm Looking for a challenging role in a reputable
+                        organization to utilize my technical skills for the
+                        growth of the organization as well as to enhance
+                        my knowledge about new and emerging trends.</p>
+                        <div class="tab-titles">
+                            <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                            <p class="tab-links" onclick="opentab('education')">Education</p>
+                            <p class="tab-links" onclick="opentab('hobbies')">Hobbies</p>
+
+                        </div>
+                        <div class="tab-contents active-tab" id="skills">
+                            <ul>
+                                <li>HTML</li>
+                                <li>CSS</li>
+                                <li>Javascript</li>
+                                <li>React Js</li>
+                                <li>Core Java</li>
+                                <li>Mongodb</li>
+                            </ul>
+                        </div>
+                        <div class="tab-contents" id="education">
+                            <ul>
+                                <li><span>2018-2022</span><br>B.tech Marine Engineering (77.84%) from Rl Institute</li>
+                                <li><span>2017-2018</span><br>HSC (76%) from TVS Matriculation Higher Secondary School</li>
+                                <li><span>2015-2016</span><br>SSLC (96%) from Amrita Vidyalayam</li>
+                                
+                            </ul>
+                        </div>
+                        <div class="tab-contents" id="hobbies">
+                            <ul>
+                                <li>Listening Music</li>
+                                <li>Playing Football</li>
+                                <li>Watching Movies</li>
+                            </ul>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---------contact------>
+    <div id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="contact-left">
+                   <h1 class="sub-tit">Contact Me</h1>
+                   <p> <i class="fa-solid fa-paper-plane"></i> bala11bmk@gmail.com</p>
+                   <p> <i class="fa-solid fa-phone"></i> +91 8870183315</p>
+                   <div class="social-icons">
+                    <a href="https://instagram.com/_bala_ak_?igshid=MzNlNGNkZWQ4Mg=="><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=100004805883704&mibextid=ZbWKwL"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.linkedin.com/in/bala-murugan-bbb042229"><i class="fa-brands fa-linkedin"></i></a>
+                   </div>
+                   <a href="images/BalaResume.pdf" download class="btn btn2">Download CV</a>
+                </div>
+                <div class="contact-right">
+                  <form name="submit-to-google-sheet">
+                    <input type="text" name="Name" placeholder="Your name" required>
+                    <input type="email" name="Email" placeholder="Your email" required>
+                    <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn btn2">Submit</button>
+                  </form>
+                  <span id="msg"></span>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var tablinks = document.getElementsByClassName("tab-links");
+        var tabcontents = document.getElementsByClassName("tab-contents");
+
+        function opentab(tabname){
+            for(tablink of tablinks){
+                tablink.classList.remove("active-link");
+            }
+            for(tabcontent of tabcontents){
+                tabcontent.classList.remove("active-tab");
+            }
+            event.currentTarget.classList.add("active-link");
+            document.getElementById(tabname).classList.add("active-tab");
+        }
+
+    </script>
+    <script>
+        var sidemeu = document.getElementById("sidemenu");
+        function openmenu(){
+             sidemeu.style.right = "0";
+
+        }
+        function closemenu(){
+             sidemeu.style.right = "-200px";
+             
+        }
+    </script>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbymTrSglnvha96yFbrdz_lRvz7BmYs_uavLNbNceoEHuWOBrxkNlCzGPkbhupfl3U5hmw/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById('msg')
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                msg.innerHTML = "Message sent successfully"
+                setTimeout(function(){
+                    msg.innerHTML=""},3000)
+                    form.reset()
+                })
+            
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
+</body>
+</html>
